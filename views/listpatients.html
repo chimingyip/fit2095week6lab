@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="logo.jpg" alt="Clinic logo" style="height:50px">
+        <a class="navbar-brand" href="/">FIT2095 Clinic</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            <a class="nav-link" href="/adddoctor">Add Doctor</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/addpatient">Add Patient</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/listdoctors">List Doctors</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/listpatients">List Patients</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/deletepatient">Delete Patient</a>
+         
+            <li class="nav-item">
+            <a class="nav-link" href="/updatedoctor">Update Doctor</a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+    <h2>List of Patients</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Doctor's ID</th>
+            <th>Age</th>
+            <th>Date Visited</th>
+            <th>Case Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (let i = 0; i < patientsDb.length; i++) { %>
+        <tr>
+            <td><%= patientsDb[i]._id %></td>
+            <td><%= patientsDb[i].name.firstName %></td>
+            <td><%= patientsDb[i].name.lastName %></td>
+            <td><%= patientsDb[i].doctor %></td>
+            <td><%= patientsDb[i].age %></td>
+            <td><%= patientsDb[i].dateVisited %></td>
+            <td><%= patientsDb[i].caseDescription %></td>
+        </tr>
+        <%} %>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
