@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const express = require("express");
 const ejs = require("ejs");
 const path = require('path');
-const moment = require('moment');
 
 const Doctor = require('./models/doctorschema');
 const Patient = require('./models/patientschema');
@@ -28,7 +27,7 @@ app.post('/postdoctor', function (req, res) {
             firstName: newDoctorObj.firstname,
             lastName: newDoctorObj.lastname,    
         },
-        dob: moment(newDoctorObj.dob).format('DD/MM/YYYY'),
+        dob: newDoctorObj.dob,
         address: {
             state: newDoctorObj.state,
             suburb: newDoctorObj.suburb,
@@ -38,10 +37,16 @@ app.post('/postdoctor', function (req, res) {
         numPatients: newDoctorObj.numpatients
     });
     newDoctor.save(function (err) {
-        if (err) throw err;
-        console.log('Added new doctor to the database');
+        if (err) {
+            let fileName = viewsPath + "invaliddata.html";
+            res.sendFile(fileName);
+        }
+        else {
+            console.log('Added new doctor to the database');
+            res.redirect("/listdoctors");
+
+        }
     });
-    res.redirect("/listdoctors");
 });
 
 app.post('/postpatient', function (req, res) {
@@ -58,10 +63,16 @@ app.post('/postpatient', function (req, res) {
         caseDescription: newPatientObj.casedescription
     });
     newPatient.save(function (err) {
-        if (err) throw err;
-        console.log('Added new patient to the database');
+        if (err) {
+            let fileName = viewsPath + "invaliddata.html";
+            res.sendFile(fileName);
+        }
+        else {
+            console.log('Added new patient to the database');
+            res.redirect("/listpatients");
+
+        }
     });
-    res.redirect("/listpatients");
 });
 
 app.post('/deleteapatient', (req, res) => {
