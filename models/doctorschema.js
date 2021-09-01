@@ -17,7 +17,8 @@ let doctorSchema = mongoose.Schema({
                 validator: function (val) {
                     return val.length >= 2 && val.length <= 3;
                 }
-            }
+            },
+            uppercase: true
         },
         suburb: String,
         street: String,
